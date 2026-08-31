@@ -92,6 +92,24 @@ li { margin: 5px 0; }
     font-size: 19px;
 }
 
+.translation-note {
+    margin: 20px 0 26px;
+    padding: 15px 18px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #f7fbfb;
+    font-size: 15px;
+}
+
+.translation-note > strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--teal-dark);
+    font-size: 17px;
+}
+
+.translation-note p { margin: 0; }
+
 .short-answer,
 .key-point,
 .next-up,
