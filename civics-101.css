@@ -43,7 +43,14 @@ a:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
     padding: 10px 0;
 }
 
-.brand-logo { width: 300px; max-width: 64vw; display: block; }
+.brand-logo {
+    width: 420px;
+    max-width: 64vw;
+    height: 100px;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
 
 .top-link {
     color: var(--teal-dark);
@@ -139,7 +146,7 @@ li { margin: 5px 0; }
 @media (max-width: 640px) {
     body { font-size: 16px; background-attachment: scroll; }
     .site-header-inner { align-items: flex-start; flex-direction: column; gap: 4px; }
-    .brand-logo { max-width: 88vw; }
+    .brand-logo { max-width: 88vw; height: 78px; }
     .page-shell { margin-top: 14px; padding-top: 26px; }
     .topic-grid { grid-template-columns: 1fr; }
     .article-nav { flex-direction: column; }
