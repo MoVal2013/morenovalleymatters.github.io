@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 MVM SpookyMap</title>
+<meta name="robots" content="noindex">
+
+<style>
+  :root{
+    --ink:#21150f;
+    --cream:#fff4df;
+    --pumpkin:#ff7a0a;
+    --pumpkin-dark:#c94f07;
+    --wood:#4b261b;
+    --wood2:#6a3725;
+    --wood3:#351a13;
+    --gold:#ffc36d;
+    --line:#db9a58;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255,177,82,.18), transparent 28%),
+      linear-gradient(#fff9f0,#f5eee5);
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 14px 36px;
+  }
+
+  .back{
+    display:inline-block;
+    margin:10px 0 8px;
+    color:#2e211b;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .back:hover{text-decoration:underline}
+
+  .hero{
+    display:block;
+    width:100%;
+    border-radius:14px;
+    box-shadow:0 10px 26px rgba(56,31,20,.18);
+  }
+
+  /* HUB */
+  .hub{
+    position:relative;
+    margin:16px 0 0;
+    width:100%;
+    overflow:hidden;
+    border-radius:16px;
+    border:1px solid #d79a5f;
+    min-height:690px;
+    padding:28px 28px 34px;
+    background:
+      radial-gradient(circle at 12% 90%, rgba(255,121,10,.24), transparent 17%),
+      radial-gradient(circle at 88% 90%, rgba(255,121,10,.22), transparent 18%),
+      linear-gradient(180deg, rgba(255,247,226,.96), rgba(246,224,191,.94));
+    box-shadow:0 12px 28px rgba(75,42,23,.12);
+  }
+
+  /* subtle woods / valley atmosphere */
+  .hub::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.3;
+    background:
+      radial-gradient(ellipse at 50% 68%, rgba(70,57,42,.16), transparent 37%),
+      linear-gradient(to top, rgba(74,50,34,.12), transparent 42%),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 74px,
+        rgba(87,65,49,.06) 75px 77px,
+        transparent 78px 148px
+      );
+  }
+
+  .hub::after{
+    content:"🎃   🍂   🍁";
+    position:absolute;
+    left:22px;
+    bottom:18px;
+    font-size:42px;
+    letter-spacing:12px;
+    opacity:.78;
+    filter:saturate(.9);
+    pointer-events:none;
+  }
+
+  .hub-head{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  .eyebrow{
+    color:#d24d0a;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+
+  h1{
+    margin:5px 0 2px;
+    font-size:clamp(34px,5vw,56px);
+    line-height:1;
+    font-weight:900;
+  }
+
+  .tagline{
+    margin:8px 0 0;
+    font-size:17px;
+    font-weight:700;
+  }
+
+  .divider{
+    margin-top:10px;
+    color:#e56712;
+    font-size:20px;
+    letter-spacing:.15em;
+  }
+
+  /* SIGNPOST */
+  .signpost{
+    position:relative;
+    z-index:2;
+    max-width:980px;
+    margin:18px auto 0;
+    padding:8px 12px 18px;
+  }
+
+  .post{
+    position:absolute;
+    left:50%;
+    top:16px;
+    bottom:6px;
+    width:30px;
+    transform:translateX(-50%);
+    border-radius:8px;
+    background:
+      linear-gradient(90deg,#32170f,#6f3c28 26%,#7b4a31 50%,#5b2d20 74%,#2c140e);
+    box-shadow:
+      inset 3px 0 0 rgba(255,255,255,.05),
+      inset -4px 0 0 rgba(0,0,0,.18),
+      0 5px 10px rgba(55,28,16,.18);
+  }
+
+  .row{
+    position:relative;
+    min-height:112px;
+    margin:4px 0;
+  }
+
+  .sign{
+    position:absolute;
+    top:6px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-height:96px;
+    width:57%;
+    padding:16px 74px 16px 58px;
+    text-decoration:none;
+    color:#fff5e4;
+    border:2px solid #26120d;
+    background:
+      repeating-linear-gradient(
+        3deg,
+        var(--wood) 0 17px,
+        var(--wood2) 18px 20px,
+        var(--wood) 21px 36px
+      );
+    box-shadow:
+      0 9px 18px rgba(54,30,20,.23),
+      inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  .row.left .sign{
+    left:1%;
+    clip-path:polygon(0 50%, 9% 8%, 90% 8%, 100% 50%, 90% 92%, 9% 92%);
+    transform:rotate(-.55deg);
+  }
+
+  .row.right .sign{
+    right:1%;
+    padding-left:74px;
+    padding-right:58px;
+    clip-path:polygon(0 50%, 10% 8%, 91% 8%, 100% 50%, 91% 92%, 10% 92%);
+    transform:rotate(.55deg);
+  }
+
+  /* make alternating boards truly point opposite directions */
+  .row.left .sign{
+    clip-path:polygon(0 50%, 11% 7%, 100% 7%, 91% 50%, 100% 93%, 11% 93%);
+  }
+
+  .row.right .sign{
+    clip-path:polygon(0 7%, 89% 7%, 100% 50%, 89% 93%, 0 93%, 9% 50%);
+  }
+
+  .sign:hover{
+    filter:brightness(1.06);
+  }
+
+  .icon{
+    flex:0 0 auto;
+    font-size:34px;
+    line-height:1;
+  }
+
+  .sign-copy{
+    min-width:0;
+  }
+
+  .sign-title{
+    display:block;
+    font-size:21px;
+    font-weight:900;
+    line-height:1.05;
+  }
+
+  .sign-sub{
+    display:block;
+    margin-top:5px;
+    color:#f3d0a3;
+    font-size:13px;
+    line-height:1.35;
+  }
+
+  .badge{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    padding:5px 8px;
+    border:1px solid rgba(255,255,255,.32);
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    color:#ffe0b4;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  .row.left .badge{right:34px}
+  .row.right .badge{right:34px}
+
+  .coming{
+    cursor:default;
+    filter:saturate(.76) brightness(.92);
+  }
+
+  .coming:hover{
+    filter:saturate(.76) brightness(.92);
+  }
+
+  .crow{
+    position:absolute;
+    z-index:4;
+    left:calc(50% + 214px);
+    top:77px;
+    font-size:42px;
+    transform:rotate(-5deg);
+    filter:grayscale(1);
+  }
+
+  /* CTA */
+  .cta-area{
+    position:relative;
+    z-index:3;
+    max-width:720px;
+    margin:10px auto 0;
+    text-align:center;
+  }
+
+  .cta-kicker{
+    margin-bottom:7px;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#582513;
+  }
+
+  .cta{
+    display:block;
+    padding:18px 24px;
+    text-decoration:none;
+    color:#1e120d;
+    background:
+      repeating-linear-gradient(
+        2deg,
+        #ff8413 0 18px,
+        #f47309 19px 21px,
+        #ff8413 22px 38px
+      );
+    border:3px solid #9a3f06;
+    border-radius:12px 4px 12px 4px;
+    box-shadow:
+      0 10px 20px rgba(159,65,9,.22),
+      inset 0 1px 0 rgba(255,255,255,.28);
+    transform:rotate(-.25deg);
+  }
+
+  .cta:hover{
+    filter:brightness(1.04);
+    transform:rotate(0deg) translateY(-1px);
+  }
+
+  .cta-main{
+    display:block;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:.01em;
+  }
+
+  .cta-note{
+    display:block;
+    margin-top:5px;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+  }
+
+  .footer-note{
+    position:relative;
+    z-index:2;
+    max-width:780px;
+    margin:18px auto 0;
+    text-align:center;
+    color:#6e5341;
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  @media (max-width:800px){
+    .hub{padding:24px 12px 28px; min-height:auto}
+    .crow{display:none}
+    .post{left:50%; width:20px}
+    .row{
+      min-height:118px;
+      margin:8px 0;
+    }
+    .sign{
+      width:94%;
+      left:3% !important;
+      right:auto !important;
+      padding:17px 56px 17px 54px !important;
+      transform:none !important;
+    }
+    .row.left .sign{
+      clip-path:polygon(0 50%, 10% 7%, 100% 7%, 91% 50%, 100% 93%, 10% 93%);
+    }
+    .row.right .sign{
+      clip-path:polygon(0 7%, 90% 7%, 100% 50%, 90% 93%, 0 93%, 9% 50%);
+    }
+    .sign-title{font-size:18px}
+    .sign-sub{font-size:12px}
+    .icon{font-size:29px}
+    .badge{
+      right:26px !important;
+      top:auto;
+      bottom:17px;
+      transform:none;
+      font-size:8px;
+    }
+    .cta-main{font-size:21px}
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <a class="back" href="/">← Back to Home</a>
+
+    <img class="hero" src="spookymap-2026-hero.png" alt="MVM SpookyMap 2026">
+
+    <section class="hub">
+      <div class="hub-head">
+        <div class="eyebrow">2026 Seasonal Map</div>
+        <h1>MVM SpookyMap Hub</h1>
+        <div class="tagline">Find your spooky places around Moreno Valley</div>
+        <div class="divider">— 🎃 —</div>
+      </div>
+
+      <div class="signpost">
+        <div class="post" aria-hidden="true"></div>
+        <div class="crow" aria-hidden="true">🐦‍⬛</div>
+
+        <div class="row left">
+          <div class="sign coming" aria-disabled="true">
+            <span class="icon">🗺️</span>
+            <span class="sign-copy">
+              <span class="sign-title">View All Events</span>
+              <span class="sign-sub">See everything currently listed on the 2026 SpookyMap.</span>
+            </span>
+            <span class="badge">Coming Soon</span>
+          </div>
+        </div>
+
+        <div class="row right">
+          <div class="sign coming" aria-disabled="true">
+            <span class="icon">🎃</span>
+            <span class="sign-copy">
+              <span class="sign-title">Browse by Event Type</span>
+              <span class="sign-sub">Haunted houses, trunk-or-treats, pumpkin patches, decorated homes, and more.</span>
+            </span>
+            <span class="badge">Coming Soon</span>
+          </div>
+        </div>
+
+        <div class="row left">
+          <div class="sign coming" aria-disabled="true">
+            <span class="icon">📅</span>
+            <span class="sign-copy">
+              <span class="sign-title">Browse by Date</span>
+              <span class="sign-sub">Find something spooky happening tonight, this weekend, or later in the season.</span>
+            </span>
+            <span class="badge">Coming Soon</span>
+          </div>
+        </div>
+
+        <div class="row right">
+          <div class="sign coming" aria-disabled="true">
+            <span class="icon">📍</span>
+            <span class="sign-copy">
+              <span class="sign-title">Browse by ZIP / Area</span>
+              <span class="sign-sub">Find Halloween and fall activities near your part of Moreno Valley.</span>
+            </span>
+            <span class="badge">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-area">
+        <div class="cta-kicker">Don't see your event?</div>
+        <a class="cta"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSftMHHAvFEkbcIgneKyEfZzSxEfoRDigTOlhb-FJlRS4QkfVA/viewform?usp=header"
+           target="_blank"
+           rel="noopener">
+          <span class="cta-main">➕ Add It to the SpookyMap →</span>
+          <span class="cta-note">2026 submissions are open</span>
+        </a>
+      </div>
+
+      <div class="footer-note">
+        The 2026 maps will grow as new submissions are reviewed and added. Map links will be activated here as each view is published.
+      </div>
+    </section>
+  </div>
+</body>
+</html>
