@@ -7,17 +7,20 @@
 <meta name="robots" content="noindex">
 <style>
   * { box-sizing: border-box; }
+
   body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background: #fff7ee;
     color: #23170f;
   }
+
   .wrap {
     max-width: 1180px;
     margin: 0 auto;
-    padding: 0 14px 34px;
+    padding: 0 14px 36px;
   }
+
   .back {
     display: inline-block;
     margin: 10px 0 8px;
@@ -26,7 +29,15 @@
     font-size: 14px;
     font-weight: 700;
   }
-  .back:hover { text-decoration: underline; }
+
+  .back:hover {
+    text-decoration: underline;
+  }
+
+  .panel {
+    position: relative;
+    width: 100%;
+  }
 
   .hero {
     display: block;
@@ -35,45 +46,78 @@
     box-shadow: 0 10px 26px rgba(56,31,20,.18);
   }
 
-  .hub-wrap {
-    position: relative;
-    margin-top: 16px;
-    width: 100%;
-  }
-  .hub-img {
+  .hub {
     display: block;
     width: 100%;
-    height: auto;
+    margin-top: 16px;
     border-radius: 14px;
     box-shadow: 0 10px 26px rgba(56,31,20,.14);
   }
 
-  /* Clickable overlays. Coordinates are percentages of the hub image. */
   .hotspot {
     position: absolute;
     display: block;
-    z-index: 2;
-    border-radius: 8px;
+    z-index: 3;
+    border-radius: 10px;
   }
-  .hotspot.live:hover {
-    outline: 3px solid rgba(255,122,10,.65);
+
+  .hotspot:hover {
+    outline: 3px solid rgba(255,122,10,.7);
     background: rgba(255,122,10,.06);
   }
 
-  /* Sign positions */
-  .all-events { left: 10%; top: 21%; width: 45%; height: 14%; }
-  .by-type    { left: 48%; top: 31%; width: 44%; height: 14%; }
-  .by-date    { left: 11%; top: 45%; width: 47%; height: 14%; }
-  .by-area    { left: 48%; top: 56%; width: 44%; height: 14%; }
-  .submit     { left: 25%; top: 78%; width: 52%; height: 12%; }
+  /*
+    HERO SUBMIT BUTTON
+    Adjust these percentages only if the hero image is replaced.
+  */
+  .hero-submit {
+    left: 29%;
+    top: 59%;
+    width: 42%;
+    height: 11%;
+  }
 
-  /* Not live yet */
-  .disabled {
-    cursor: default;
+  /*
+    HUB MAP HOTSPOTS
+    These are ready for URLs as each map goes live.
+  */
+  .all-events {
+    left: 9%;
+    top: 22%;
+    width: 46%;
+    height: 14%;
+  }
+
+  .by-type {
+    left: 48%;
+    top: 34%;
+    width: 44%;
+    height: 14%;
+  }
+
+  .by-date {
+    left: 10%;
+    top: 48%;
+    width: 47%;
+    height: 14%;
+  }
+
+  .by-area {
+    left: 48%;
+    top: 61%;
+    width: 44%;
+    height: 14%;
+  }
+
+  .coming {
+    pointer-events: none;
   }
 
   @media (max-width: 700px) {
-    .wrap { padding-left: 8px; padding-right: 8px; }
+    .wrap {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
   }
 </style>
 </head>
@@ -81,21 +125,51 @@
 <div class="wrap">
   <a class="back" href="/">← Back to Home</a>
 
-  <img class="hero" src="spookymap-2026-hero.png" alt="MVM SpookyMap 2026">
+  <div class="panel">
+    <img
+      class="hero"
+      src="spookymap-2026-hero.png"
+      alt="MVM SpookyMap 2026">
 
-  <div class="hub-wrap">
-    <img class="hub-img" src="spookymap-2026-hub.png" alt="MVM SpookyMap Hub">
+    <a
+      class="hotspot hero-submit"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSftMHHAvFEkbcIgneKyEfZzSxEfoRDigTOlhb-FJlRS4QkfVA/viewform?usp=header"
+      target="_blank"
+      rel="noopener"
+      aria-label="Submit your event to the 2026 MVM SpookyMap">
+    </a>
+  </div>
 
-    <span class="hotspot all-events disabled" aria-label="View All Events — coming soon"></span>
-    <span class="hotspot by-type disabled" aria-label="Browse by Event Type — coming soon"></span>
-    <span class="hotspot by-date disabled" aria-label="Browse by Date — coming soon"></span>
-    <span class="hotspot by-area disabled" aria-label="Browse by ZIP or Area — coming soon"></span>
+  <div class="panel">
+    <img
+      class="hub"
+      src="spookymap-2026-hub-final.png"
+      alt="MVM SpookyMap Hub with map options">
 
-    <a class="hotspot submit live"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSftMHHAvFEkbcIgneKyEfZzSxEfoRDigTOlhb-FJlRS4QkfVA/viewform?usp=header"
-       target="_blank"
-       rel="noopener"
-       aria-label="Submit Your Event"></a>
+    <!--
+      MAP LINKS:
+      When each map is ready, replace the <span> with an <a href="...">,
+      keeping the same class name.
+
+      Example:
+      <a class="hotspot all-events"
+         href="PASTE_MAP_URL_HERE"
+         target="_blank"
+         rel="noopener"
+         aria-label="View all 2026 SpookyMap events"></a>
+    -->
+
+    <span class="hotspot all-events coming"
+          aria-label="View All Events — coming soon"></span>
+
+    <span class="hotspot by-type coming"
+          aria-label="Browse by Event Type — coming soon"></span>
+
+    <span class="hotspot by-date coming"
+          aria-label="Browse by Date — coming soon"></span>
+
+    <span class="hotspot by-area coming"
+          aria-label="Browse by ZIP or Area — coming soon"></span>
   </div>
 </div>
 </body>
