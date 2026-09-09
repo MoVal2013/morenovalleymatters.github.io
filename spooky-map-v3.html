@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 MVM SpookyMap</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --ink:#21152a;
+    --cream:#fff7e8;
+    --pumpkin:#f47a10;
+    --pumpkin2:#ff922b;
+    --rust:#8f3d1f;
+    --wood:#5b2f22;
+    --wood2:#75412d;
+    --gold:#f7c56c;
+    --muted:#7a6555;
+    --line:#d9a16b;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 0%, rgba(255,190,110,.22), transparent 28%),
+      linear-gradient(#fff8ef,#f6eee5);
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 14px 42px}
+  .back{
+    display:inline-block;
+    margin:10px 0 8px;
+    color:#3a261b;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+  }
+  .back:hover{text-decoration:underline}
+
+  .hero{
+    width:100%;
+    display:block;
+    border-radius:14px;
+    box-shadow:0 12px 28px rgba(41,24,18,.18);
+  }
+
+  .hub{
+    position:relative;
+    margin:22px auto 0;
+    max-width:980px;
+    padding:34px 22px 38px;
+    overflow:hidden;
+    border:1px solid #e8b784;
+    border-radius:24px;
+    background:
+      radial-gradient(circle at 8% 6%, rgba(255,164,63,.15), transparent 22%),
+      radial-gradient(circle at 92% 94%, rgba(118,60,38,.11), transparent 28%),
+      linear-gradient(180deg,#fff7e9 0%,#f8ead8 100%);
+    box-shadow:0 18px 36px rgba(74,41,24,.13);
+  }
+
+  .hub:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.12;
+    background:
+      repeating-linear-gradient(
+        7deg,
+        transparent 0 18px,
+        rgba(84,44,29,.18) 19px 20px
+      );
+  }
+
+  .hub-head{
+    position:relative;
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .eyebrow{
+    color:#c94e12;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  h1{
+    margin:5px 0 5px;
+    font-size:clamp(30px,5vw,46px);
+    line-height:1;
+  }
+  .spooky-divider{
+    font-size:18px;
+    letter-spacing:.25em;
+    margin-top:8px;
+  }
+
+  .signpost{
+    position:relative;
+    z-index:1;
+    max-width:800px;
+    margin:0 auto;
+    padding:6px 0 8px;
+  }
+
+  .post{
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:24px;
+    transform:translateX(-50%);
+    border-radius:8px;
+    background:
+      linear-gradient(90deg,#3e1e17,#6a3928 28%,#7e4b33 52%,#5b3024 73%,#341913);
+    box-shadow:inset 3px 0 0 rgba(255,255,255,.05), inset -3px 0 0 rgba(0,0,0,.12);
+  }
+
+  .sign{
+    position:relative;
+    display:block;
+    width:min(88%,760px);
+    min-height:92px;
+    margin:18px auto;
+    padding:16px 70px 15px 70px;
+    color:#fff6e8;
+    text-decoration:none;
+    background:
+      linear-gradient(rgba(255,255,255,.03),rgba(0,0,0,.03)),
+      repeating-linear-gradient(
+        4deg,
+        var(--wood) 0 16px,
+        var(--wood2) 17px 19px,
+        var(--wood) 20px 36px
+      );
+    border:2px solid #2e1712;
+    box-shadow:
+      0 9px 18px rgba(54,30,20,.22),
+      inset 0 1px 0 rgba(255,255,255,.09);
+    clip-path:polygon(0 14%, 87% 14%, 100% 50%, 87% 86%, 0 86%, 4% 50%);
+    transition:transform .18s ease, filter .18s ease;
+  }
+
+  .sign:nth-of-type(2){transform:rotate(-.6deg)}
+  .sign:nth-of-type(3){transform:rotate(.7deg)}
+  .sign:nth-of-type(4){transform:rotate(-.4deg)}
+  .sign:nth-of-type(5){transform:rotate(.45deg)}
+
+  .sign:hover{
+    transform:translateY(-2px) scale(1.012);
+    filter:brightness(1.08);
+  }
+
+  .sign .icon{
+    position:absolute;
+    left:28px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:31px;
+  }
+
+  .sign-title{
+    display:block;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:.02em;
+  }
+
+  .sign-sub{
+    display:block;
+    margin-top:4px;
+    color:#f3cf9f;
+    font-size:13px;
+    line-height:1.3;
+  }
+
+  .badge{
+    position:absolute;
+    right:48px;
+    top:50%;
+    transform:translateY(-50%) rotate(2deg);
+    padding:5px 8px;
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:999px;
+    color:#ffe4ba;
+    background:rgba(255,255,255,.08);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  .coming{
+    cursor:default;
+    filter:saturate(.72) brightness(.9);
+  }
+  .coming:hover{
+    transform:none;
+    filter:saturate(.72) brightness(.9);
+  }
+
+  .cta-wrap{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    margin-top:26px;
+    padding-top:18px;
+  }
+
+  .cta-kicker{
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:#6f2d18;
+  }
+
+  .cta{
+    display:inline-block;
+    margin-top:10px;
+    min-width:min(92%,560px);
+    padding:18px 28px;
+    color:#1e120d;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+    background:linear-gradient(180deg,#ff9c31,#f4740b);
+    border:3px solid #fff3d8;
+    outline:2px solid #d55a08;
+    border-radius:14px 4px 14px 4px;
+    box-shadow:0 10px 20px rgba(187,79,11,.22);
+    transform:rotate(-.2deg);
+  }
+  .cta:hover{filter:brightness(1.04);transform:rotate(0deg) translateY(-1px)}
+
+  .cta-note{
+    margin-top:8px;
+    color:#6d513e;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.04em;
+  }
+
+  .footnote{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    max-width:760px;
+    margin:22px auto 0;
+    color:#6f5a4c;
+    font-size:13px;
+    line-height:1.45;
+  }
+
+  @media (max-width:700px){
+    .hub{padding:28px 12px 30px}
+    .sign{
+      width:96%;
+      min-height:100px;
+      padding:18px 56px 17px 58px;
+      clip-path:polygon(0 10%, 86% 10%, 100% 50%, 86% 90%, 0 90%, 4% 50%);
+    }
+    .sign .icon{left:20px;font-size:27px}
+    .sign-title{font-size:17px}
+    .sign-sub{font-size:12px}
+    .badge{
+      right:34px;
+      top:auto;
+      bottom:16px;
+      transform:rotate(2deg);
+      font-size:9px;
+    }
+    .post{width:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">← Back to Home</a>
+
+  <img class="hero" src="spookymap-2026-hero.png" alt="MVM SpookyMap 2026">
+
+  <section class="hub">
+    <div class="hub-head">
+      <div class="eyebrow">2026 Seasonal Map</div>
+      <h1>MVM SpookyMap Hub</h1>
+      <div class="spooky-divider">🎃 · 🦇 · 👻</div>
+    </div>
+
+    <div class="signpost">
+      <div class="post" aria-hidden="true"></div>
+
+      <div class="sign coming" aria-disabled="true">
+        <span class="icon">🗺️</span>
+        <span class="sign-title">View All Events</span>
+        <span class="sign-sub">See everything currently listed on the 2026 SpookyMap.</span>
+        <span class="badge">Coming Soon</span>
+      </div>
+
+      <div class="sign coming" aria-disabled="true">
+        <span class="icon">🎃</span>
+        <span class="sign-title">Browse by Event Type</span>
+        <span class="sign-sub">Haunted houses, trunk-or-treats, pumpkin patches, decorated homes, and more.</span>
+        <span class="badge">Coming Soon</span>
+      </div>
+
+      <div class="sign coming" aria-disabled="true">
+        <span class="icon">📅</span>
+        <span class="sign-title">Browse by Date</span>
+        <span class="sign-sub">Find something spooky happening today, this weekend, or later in the season.</span>
+        <span class="badge">Coming Soon</span>
+      </div>
+
+      <div class="sign coming" aria-disabled="true">
+        <span class="icon">📍</span>
+        <span class="sign-title">Browse by ZIP / Area</span>
+        <span class="sign-sub">Find Halloween and fall activities near your part of Moreno Valley.</span>
+        <span class="badge">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <div class="cta-kicker">Have a spooky spot to add?</div>
+      <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSftMHHAvFEkbcIgneKyEfZzSxEfoRDigTOlhb-FJlRS4QkfVA/viewform?usp=header" target="_blank" rel="noopener">
+        ➕ Submit Your Event
+      </a>
+      <div class="cta-note">2026 submissions are open</div>
+    </div>
+
+    <div class="footnote">
+      The map will grow as new submissions are reviewed and added. Map links will be activated here as the 2026 views are published.
+    </div>
+  </section>
+</div>
+</body>
+</html>
