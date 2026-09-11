@@ -8,126 +8,259 @@
 <link rel="icon" href="favicon.png?v=1">
 <style>
 * { box-sizing: border-box; }
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: #333;
-    text-align: center;
+    color: #2c241f;
     background:
-      linear-gradient(rgba(255,255,255,.68), rgba(255,255,255,.68)),
-      url('background.jpg');
+        linear-gradient(rgba(245,248,251,.74), rgba(245,248,251,.82)),
+        url('background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
-.container {
-    max-width: 620px;
+
+.page {
+    max-width: 860px;
     margin: 0 auto;
-    padding: 10px 20px 48px;
+    padding: 18px 18px 52px;
 }
+
 .logo {
-    width: 420px;
-    max-width: 90%;
-    margin-bottom: 2px;
-}
-.back {
     display: block;
-    width: fit-content;
-    margin: 0 auto 20px;
-    color: #333;
+    width: 360px;
+    max-width: 80%;
+    margin: 0 auto 2px;
+}
+
+.back {
+    display: inline-block;
+    margin: 2px 0 18px;
+    color: #2c241f;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
 }
 .back:hover { text-decoration: underline; }
+
+.hero {
+    text-align: center;
+    margin: 0 auto 24px;
+}
+.eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #52606d;
+}
 h1 {
-    margin: 10px 0 8px;
-    font-size: 28px;
+    margin: 8px 0 8px;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.05;
 }
 .intro {
-    margin: 0 auto 24px;
-    max-width: 500px;
-    line-height: 1.5;
-    font-size: 15px;
-}
-.card {
-    max-width: 500px;
-    margin: 14px auto;
-    padding: 22px 20px;
-    border-radius: 12px;
-    background: rgba(255,255,255,.88);
-    box-shadow: 0 6px 18px rgba(0,0,0,.10);
-}
-.card h2 {
-    margin: 0 0 8px;
-    font-size: 22px;
-}
-.card p {
-    margin: 0 0 16px;
-    line-height: 1.45;
-    font-size: 14px;
-}
-.btn {
-    display: block;
     margin: 0 auto;
+    max-width: 640px;
+    line-height: 1.55;
+    font-size: 16px;
+    color: #4b4b4b;
+}
+
+.maps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.map-card {
+    min-height: 330px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 14px 34px rgba(0,0,0,.16);
+    border: 1px solid rgba(255,255,255,.7);
+}
+
+.map-card .wash {
+    position: absolute;
+    inset: 0;
+}
+
+.spooky {
+    background:
+      radial-gradient(circle at 82% 16%, rgba(255,186,73,.32), transparent 27%),
+      linear-gradient(145deg, #2e170f 0%, #6d2a12 42%, #ad4f10 100%);
+    color: #fff8ec;
+}
+.spooky .wash {
+    background:
+      radial-gradient(circle at 12% 88%, rgba(0,0,0,.28), transparent 28%),
+      radial-gradient(circle at 92% 88%, rgba(255,132,0,.22), transparent 26%);
+}
+.spooky::before {
+    content: "🎃";
+    position: absolute;
+    right: 22px;
+    bottom: 12px;
+    font-size: 96px;
+    opacity: .17;
+    transform: rotate(-8deg);
+}
+
+.jingle {
+    background:
+      radial-gradient(circle at 75% 18%, rgba(255,255,255,.48), transparent 24%),
+      linear-gradient(145deg, #0c3b3a 0%, #0e665e 45%, #287a72 100%);
+    color: #f5fffd;
+}
+.jingle .wash {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(255,255,255,.18), transparent 22%),
+      radial-gradient(circle at 88% 84%, rgba(255,255,255,.12), transparent 26%);
+}
+.jingle::before {
+    content: "🎄";
+    position: absolute;
+    right: 18px;
+    bottom: 10px;
+    font-size: 92px;
+    opacity: .17;
+}
+
+.card-inner {
+    position: relative;
+    z-index: 2;
+    padding: 28px 28px 30px;
+}
+
+.season {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.23);
+}
+
+.map-card h2 {
+    margin: 18px 0 9px;
+    font-size: 30px;
+    line-height: 1.05;
+}
+
+.map-card p {
+    max-width: 430px;
+    margin: 0 0 22px;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.features {
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.75;
+}
+.features li::before {
+    content: "• ";
+    font-weight: 900;
+}
+
+.btn {
+    display: inline-block;
     padding: 12px 18px;
-    max-width: 360px;
-    border-radius: 8px;
+    border-radius: 9px;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    background: #0ea5a4;
+    font-weight: 800;
 }
-.btn:hover { background: #0c8f8e; }
+
+.spooky .btn {
+    color: #4c210b;
+    background: #ffd19a;
+}
+.spooky .btn:hover { background: #ffe0ba; }
+
 .coming {
-    display: block;
-    margin: 0 auto;
+    display: inline-block;
     padding: 12px 18px;
-    max-width: 360px;
-    border-radius: 8px;
+    border-radius: 9px;
     font-size: 14px;
-    font-weight: 700;
-    color: #555;
-    background: #e8e8e8;
+    font-weight: 800;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.24);
 }
-.note {
+
+.footer {
     margin-top: 24px;
+    text-align: center;
     font-size: 13px;
-    color: #555;
+    color: #5c5c5c;
+}
+
+@media (max-width: 720px) {
+    .maps { grid-template-columns: 1fr; }
+    .map-card { min-height: 300px; }
+    .page { padding-left: 12px; padding-right: 12px; }
 }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="page">
     <img src="moreno-valley-matters-logo.png" alt="Moreno Valley Matters Logo" class="logo">
+
     <a class="back" href="/">← Back to Home</a>
 
-    <h1>🎉 MVM Holiday Maps</h1>
-    <p class="intro">
-        Just for fun! Explore seasonal events, decorated homes, and community activities
-        in Moreno Valley and the surrounding area.
-    </p>
-
-    <div class="card">
-        <h2>🎃 MVM SpookyMap</h2>
-        <p>
-            Find Halloween and fall events, haunted attractions, decorated homes,
-            trunk-or-treats, and more on the 2026 MVM SpookyMap.
+    <div class="hero">
+        <div class="eyebrow">Just for fun</div>
+        <h1>MVM Holiday Maps</h1>
+        <p class="intro">
+            Seasonal events, decorated homes, community displays, and local places worth finding —
+            all gathered into MVM's holiday maps.
         </p>
-        <a class="btn" href="spooky-map.html">Explore the 2026 SpookyMap</a>
     </div>
 
-    <div class="card">
-        <h2>🎄 MVM JingleMap</h2>
-        <p>
-            Holiday lights, seasonal displays, and community events will return
-            for the 2026 holiday season.
-        </p>
-        <span class="coming">Coming for the 2026 Holiday Season</span>
+    <div class="maps">
+        <section class="map-card spooky">
+            <div class="wash"></div>
+            <div class="card-inner">
+                <span class="season">Halloween & Fall</span>
+                <h2>🎃 MVM SpookyMap</h2>
+                <p>Explore the 2026 map for Halloween and fall fun around Moreno Valley and nearby communities.</p>
+                <ul class="features">
+                    <li>Events & fall festivals</li>
+                    <li>Haunted attractions</li>
+                    <li>Trunk-or-treats</li>
+                    <li>Decorated homes & more</li>
+                </ul>
+                <a class="btn" href="spooky-map.html">Explore the 2026 SpookyMap →</a>
+            </div>
+        </section>
+
+        <section class="map-card jingle">
+            <div class="wash"></div>
+            <div class="card-inner">
+                <span class="season">Winter Holidays</span>
+                <h2>🎄 MVM JingleMap</h2>
+                <p>Holiday lights, seasonal displays, and community events return for the 2026 holiday season.</p>
+                <ul class="features">
+                    <li>Holiday light displays</li>
+                    <li>Seasonal events</li>
+                    <li>Decorated homes</li>
+                    <li>Community favorites</li>
+                </ul>
+                <span class="coming">Coming for the 2026 Holiday Season</span>
+            </div>
+        </section>
     </div>
 
-    <p class="note">Maintained by Moreno Valley Matters™</p>
+    <div class="footer">Maintained by Moreno Valley Matters™</div>
 </div>
 </body>
 </html>
