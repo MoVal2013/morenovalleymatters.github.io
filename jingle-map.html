@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 MVM JingleMap</title>
+<meta name="robots" content="noindex">
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef7fb;
+    color: #173042;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 14px 36px;
+  }
+
+  .back {
+    display: inline-block;
+    margin: 10px 0 8px;
+    color: #173042;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .back:hover {
+    text-decoration: underline;
+  }
+
+  .panel {
+    position: relative;
+    width: 100%;
+  }
+
+  .hero {
+    display: block;
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(23,48,66,.18);
+  }
+
+  .hub {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 26px rgba(23,48,66,.14);
+  }
+
+  .hotspot {
+    position: absolute;
+    display: block;
+    z-index: 3;
+    border-radius: 10px;
+  }
+
+  .hotspot:hover {
+    outline: 3px solid rgba(18,145,167,.7);
+    background: rgba(18,145,167,.06);
+  }
+
+  /*
+    HERO SUBMIT BUTTON
+    Adjust these percentages only if the hero image is replaced.
+  */
+  .hero-submit {
+    left: 29%;
+    top: 59%;
+    width: 42%;
+    height: 11%;
+  }
+
+  /*
+    HUB MAP HOTSPOTS
+    These are ready for URLs as each map goes live.
+  */
+  .all-events {
+    left: 9%;
+    top: 22%;
+    width: 46%;
+    height: 14%;
+  }
+
+  .by-type {
+    left: 48%;
+    top: 34%;
+    width: 44%;
+    height: 14%;
+  }
+
+  .by-date {
+    left: 10%;
+    top: 48%;
+    width: 47%;
+    height: 14%;
+  }
+
+  .by-area {
+    left: 48%;
+    top: 61%;
+    width: 44%;
+    height: 14%;
+  }
+
+  .coming {
+    pointer-events: none;
+  }
+
+  @media (max-width: 700px) {
+    .wrap {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">← Back to Home</a>
+
+  <div class="panel">
+    <img
+      class="hero"
+      src="jinglemap-2026-hero.png"
+      alt="MVM JingleMap 2026">
+
+    <a
+      class="hotspot hero-submit"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSdlclcLOe5nJxXypd-zXtSDE96i-LU7dii1H_xOaNfkoakHrQ/viewform?usp=header"
+      target="_blank"
+      rel="noopener"
+      aria-label="Submit your event to the 2026 MVM JingleMap">
+    </a>
+  </div>
+
+  <div class="panel">
+    <img
+      class="hub"
+      src="jinglemap-2026-hub-final.png"
+      alt="MVM JingleMap Hub with map options">
+
+    <!--
+      MAP LINKS:
+      When each map is ready, replace the <span> with an <a href="...">,
+      keeping the same class name.
+
+      Example:
+      <a class="hotspot all-events"
+         href="PASTE_MAP_URL_HERE"
+         target="_blank"
+         rel="noopener"
+         aria-label="View all 2026 JingleMap events"></a>
+    -->
+
+    <a class="hotspot all-events"
+       href="https://www.google.com/maps/d/viewer?mid=1DyNtjdwzQjjH1rSZGJgQxLB3nAnjLYk"
+       target="_blank"
+       rel="noopener"
+       aria-label="View all 2026 JingleMap events"></a>
+
+    <a class="hotspot by-type"
+       href="https://www.google.com/maps/d/viewer?mid=15vN91cjUn4WXHX3d_jTQCempOOpn-8M"
+       target="_blank"
+       rel="noopener"
+       aria-label="Browse 2026 JingleMap events by Event Type"></a>
+
+    <a class="hotspot by-date"
+       href="https://www.google.com/maps/d/viewer?mid=1vVp6JYgkf3B-bySEie9Ed6b2SU3sl6s"
+       target="_blank"
+       rel="noopener"
+       aria-label="Browse 2026 JingleMap events by Date"></a>
+
+    <a class="hotspot by-area"
+       href="https://www.google.com/maps/d/viewer?mid=1B78yzeykCfbrPf9EGZXa0OLoWOCdTRk"
+       target="_blank"
+       rel="noopener"
+       aria-label="Browse 2026 JingleMap events by ZIP or Area"></a>
+  </div>
+</div>
+</body>
+</html>
