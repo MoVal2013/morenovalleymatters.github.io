@@ -113,6 +113,36 @@
     pointer-events: none;
   }
 
+ 
+  /* JingleMap searchable Event List */
+  .event-list-section {
+    margin-top: 24px;
+  }
+
+  .event-list-section h2 {
+    text-align: center;
+    color: #195239;
+    font-size: 24px;
+    margin: 0 0 8px;
+  }
+
+  .event-list-section p {
+    text-align: center;
+    margin: 0 0 16px;
+    font-size: 14px;
+  }
+
+  .event-list-frame {
+    display: block;
+    width: 100%;
+    height: 650px;
+    border: 1px solid #d1dfd3;
+    border-radius: 14px;
+    background: #fffaf2;
+  }
+
+ 
+
   @media (max-width: 700px) {
     .wrap {
       padding-left: 8px;
@@ -183,6 +213,27 @@
        rel="noopener"
        aria-label="Browse 2026 JingleMap events by ZIP or Area"></a>
   </div>
+ 
+  <!-- JingleMap 2026 Searchable Event List -->
+  <section class="event-list-section"
+           aria-labelledby="event-list-heading">
+
+    <h2 id="event-list-heading">🎄 Search Holiday Events</h2>
+
+    <p>
+      Browse holiday events by ZIP code or celebration type,
+      or search for a specific location.
+    </p>
+
+    <iframe
+      class="event-list-frame"
+      src="https://script.google.com/macros/s/AKfycbxOVnf2quXEN3r98lxfRr7ArzVFclyC1mgDcmt9KEvFxXrj86wwe_KOJYZeHdIdtDG0GA/exec"
+      title="JingleMap 2026 Searchable Event List"
+      loading="lazy">
+    </iframe>
+
+  </section>
+
 </div>
 </body>
 </html>
